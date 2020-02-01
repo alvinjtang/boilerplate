@@ -4,3 +4,36 @@
   text-align: center;
   font-size: 300px;
 }
+
+.lists-div {
+  display: flex;
+  flex-direction: row;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #89C2FF;
+  width: 300px;
+}
+
+.btn-div {
+  margin: 10px;
+}
+
+.player-name {
+  text-align: center;
+}
+
+.list-item {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.movie {
+  word-wrap: break-word;
+}
