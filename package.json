@@ -9,7 +9,8 @@
     "build": "webpack",
     "build-watch": "webpack -w",
     "start-server": "nodemon server",
-    "start": "npm run build-watch & npm run start-server"
+    "start-dev": "npm run build-watch & npm run start-server",
+    "start": "node server"
   },
   "keywords": [],
   "author": "",
