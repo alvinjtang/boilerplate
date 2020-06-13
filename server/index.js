@@ -1,29 +1,60 @@
-const express = require('express');
-const app = express();
 const path = require('path');
+const express = require('express');
 const volleyball = require('volleyball');
 
-// Middleware logger
-app.use(volleyball);
+const PORT = process.env.PORT || 3000;
+const app = express();
 
-// Serves static files
+const initApp = () => {
+  app.use(volleyball);
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: false }));
+};
+
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// Renders index.html
+app.use('/api', require('./api'));
+
+app.use((req, res, next) => {
+  if (path.extname(req.path).length) {
+    const err = new Error('Not found');
+    err.status = 404;
+    next(err);
+  } else {
+    next();
+  }
+});
+
 app.get('*', (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'public/index.html'));
 });
 
-// Error handling
 app.use((err, req, res, next) => {
   console.error(err);
   console.error(err.stack);
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
-var server = app.listen(process.env.PORT || 3000, function () {
-  var port = server.address().port;
-  console.log("Express is working on port " + port);
-});
+const listen = () => {
+  app.listen(PORT, () => {
+    console.log(`****** listening on port ${PORT} ******`);
+  });
+};
+
+const syncDb = () => db.sync();
+
+const bootApp = () => {
+  Promise.all([
+    syncDb(),
+    initApp(),
+    listen()
+  ]);
+};
+
+if (require.main === module) {
+  bootApp();
+} else {
+  initApp();
+}
 
 module.exports = app;

@@ -122,23 +122,6 @@ class Lists extends React.Component {
   render() {
     return (
       <div>
-        {/* <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            name="movieTitle"
-            value={this.state.movieTitle}
-            onChange={this.handleChange}
-          />
-          <button type="submit" disabled={!this.state.movieTitle}>
-            Add Movie
-          </button>
-          <ol>
-            <h3>Movies:</h3>
-            {this.state.movieList.map(movie => (
-              <li>{movie}</li>
-            ))}
-          </ol>
-        </form> */}
         <div className="lists-div">
           {this.state.listsData.map((list, i) => {
             return (
